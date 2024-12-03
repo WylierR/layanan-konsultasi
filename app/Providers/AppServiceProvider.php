@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Form;
+use App\Models\Notification;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,5 +24,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useTailwind();
+
+        $notifications = Notification::latest()->take(5)->get();
+        View::share('notifications', $notifications);
+
+        View::composer('*', function ($view) {
+            $forms = Form::all();
+            $view->with('forms', $forms);
+        });
     }
 }

@@ -16,9 +16,9 @@ class FormController extends Controller
         $max_data = 5;
         $form = Form::paginate($max_data);
 
-        $unreadNotifications = Auth::user()->unreadNotifications;
 
-        return view('admin.dashboard', compact('form', 'unreadNotifications'));
+
+        return view('admin.dashboard', compact('form'));
     }
     function tambah()
     {

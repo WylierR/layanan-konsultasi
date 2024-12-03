@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="bg-">
+    <div class="">
         <div class="mx-auto py-3 bg-light border-gray-400 rounded container" style="width: 1080px">
             <div class="mx-auto py-2 bg-dark text-white rounded" style="width: 920px">
                 <h1 class="text-center p-2 m-auto" style="width: 790px">LAYANAN KONSULTASI INSPEKTORAT</h1>

@@ -13,13 +13,13 @@
                     {{ __('Admin Dashboard') }}
                 </div>
             </div> --}}
-            @if (Auth::user()->hasRole('admin'))
+            {{-- @if (Auth::user()->hasRole('admin'))
                 @foreach ($unreadNotifications as $notification)
                     <div>
                         <p>Ada permohonan konsultasi baru dari {{ $notification->data['nama'] }}.</p>
                     </div>
                 @endforeach
-            @endif
+            @endif --}}
 
 
 

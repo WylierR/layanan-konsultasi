@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class FormSubmittedNotification extends Notification
+class FormSubmittedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
     protected $form;
@@ -50,10 +50,11 @@ class FormSubmittedNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
+            'form_id' => $this->form['id'],
             'nama' => $this->form['nama'],
             'email' => $this->form['email'],
             'jenis_layanan' => $this->form['jenis_layanan'],
-            'create_at' => $this->form['create_at'],
+            'created_at' => $this->form['created_at'],
         ];
     }
 }
