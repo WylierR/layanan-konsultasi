@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/form', function () {
 //     return view('form.form');
 // });
-Route::get('/form', [FormController::class, 'tambah'])->name('form');
+Route::get('/', [FormController::class, 'tambah'])->name('form');
 
 Route::post('/form/submit', [FormController::class, 'submit'])->name('form.submit');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,6 +29,11 @@ Route::get(
     'admin',
     [FormController::class, 'tampil']
 )->middleware(['auth', 'verified', 'role:admin'])->name('form.tampil');
+
+Route::get(
+    'admin/jadwal',
+    [FormController::class, 'jadwal']
+)->middleware(['auth', 'verified', 'role:admin'])->name('form.jadwal');
 
 Route::get(
     'admin/detail/{id}',

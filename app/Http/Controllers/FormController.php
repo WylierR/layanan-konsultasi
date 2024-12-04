@@ -14,7 +14,7 @@ class FormController extends Controller
     function tampil()
     {
         $max_data = 5;
-        $form = Form::paginate($max_data);
+        $form = Form::orderBy('created_at', 'desc')->paginate($max_data);
 
 
 
@@ -59,5 +59,15 @@ class FormController extends Controller
     {
         $form = Form::find($id);
         return view('admin.detail', compact('form'));
+    }
+
+    function jadwal()
+    {
+        $max_data = 5;
+        $form = Form::orderBy('created_at', 'desc')->paginate($max_data);
+
+
+
+        return view('admin.jadwal', compact('form'));
     }
 }

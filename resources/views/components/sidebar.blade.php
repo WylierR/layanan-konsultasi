@@ -6,7 +6,7 @@
         <div class="flex items-center justify-between px-2 pt-10 pb-6">
             <div class="flex items-center">
                 <a href="" class="mx-2">
-                    <img class="size-16" src="{{ asset('storage/images/logo_pemda.png') }}" alt="">
+                    <img class="size-16" src="{{ asset('images/logo_pemda.png') }}" alt="">
                     {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" /> --}}
                 </a>
                 <span class="text-2xl font-extrabold">Inspektorat DIY</span>
@@ -29,7 +29,7 @@
                 <a href="/admin">Dashboard</a>
             </li>
             <li class="py-4 px-4 hover:bg-gray-200 text-blue-800">
-                <a href="#">Jadwal</a>
+                <a href="/admin/jadwal">Jadwal</a>
             </li>
             <li class="py-4 px-4 hover:bg-gray-200 text-blue-800">
                 <a href="#">Riwayat</a>
