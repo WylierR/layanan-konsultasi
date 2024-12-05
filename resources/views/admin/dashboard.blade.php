@@ -45,7 +45,7 @@
                             </th>
                         </tr>
                     </thead>
-                    @foreach ($form as $data)
+                    @forelse ($form as $data)
                         <tbody>
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -67,8 +67,14 @@
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
                                 </td>
                             </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                    Tidak ada data yang tersedia.
+                                </td>
+                            </tr>
                         </tbody>
-                    @endforeach
+                    @endforelse
 
                 </table>
                 <div class="px-6 py-2">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Form;
 use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\FormSubmittedNotification;
@@ -11,7 +12,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class FormController extends Controller
 {
-    function tampil()
+    public function tampil()
     {
         $max_data = 5;
         $form = Form::orderBy('created_at', 'desc')->paginate($max_data);
@@ -20,12 +21,12 @@ class FormController extends Controller
 
         return view('admin.dashboard', compact('form'));
     }
-    function tambah()
+    public function tambah()
     {
         return view('form.form');
     }
 
-    function submit(Request $request)
+    public function submit(Request $request)
     {
         $form = new Form();
         $form->email = $request->email;
@@ -55,13 +56,13 @@ class FormController extends Controller
         return redirect()->route('form')->with('success', 'Permohonan ada telah dikirim.');
     }
 
-    function detail($id)
+    public function detail($id)
     {
         $form = Form::find($id);
         return view('admin.detail', compact('form'));
     }
 
-    function jadwal()
+    public function jadwal()
     {
         $max_data = 5;
         $form = Form::orderBy('created_at', 'desc')->paginate($max_data);
@@ -69,5 +70,17 @@ class FormController extends Controller
 
 
         return view('admin.jadwal', compact('form'));
+    }
+    public function markasread($id)
+    {
+        $user = Auth::user();
+
+        foreach ($user->unreadNotifications as $notification) {
+            $notification->markAsRead();
+
+            $formId = $notification->data['form_id'];
+            return redirect()->route('form.detail', $formId);
+        }
+        return redirect()->back()->with('error', 'Notification not found');
     }
 }

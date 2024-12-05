@@ -40,6 +40,13 @@ Route::get(
     [FormController::class, 'detail']
 )->middleware(['auth', 'verified', 'role:admin'])->name('form.detail');
 
+Route::get('/notifications/{id}/mark-as-read', [FormController::class, 'markasread'])
+    ->middleware(['auth', 'verified', 'role:admin'])->name('notifications.markasread');
+
+Route::get('/notifikasi', function () {
+    return view('admin.daftar-notifikasi');
+})->middleware(['auth', 'verified', 'role:admin'])->name('notifications.list');
+
 Route::get('bidang', function () {
     return view('bidang.dashboard');
 })->middleware(['auth', 'verified', 'role:bidang']);
