@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::user()->hasRole('admin')) {
             return redirect()->to('admin');
         }
-        if (Auth::user()->hasRole('bidang')) {
+        if (Auth::user()->hasRole('bidang_pemerintahan|bidang_sarana_prasarana|bidang_sosial_budaya|bidang_perekonomian')) {
             return redirect()->to('bidang');
         }
 

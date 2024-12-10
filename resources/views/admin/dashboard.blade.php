@@ -8,21 +8,6 @@
     <div class="pt-10">
         <h1 class="px-8 pb-10 font-semibold text-3xl">DAFTAR PERMOHONAN LAYANAN KONSULTASI INSPEKTORAT</h1>
         <div class="max-w-7xl mx-auto sm:px-6 px-12">
-            {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __('Admin Dashboard') }}
-                </div>
-            </div> --}}
-            {{-- @if (Auth::user()->hasRole('admin'))
-                @foreach ($unreadNotifications as $notification)
-                    <div>
-                        <p>Ada permohonan konsultasi baru dari {{ $notification->data['nama'] }}.</p>
-                    </div>
-                @endforeach
-            @endif --}}
-
-
-
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead

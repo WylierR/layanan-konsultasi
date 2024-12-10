@@ -23,13 +23,13 @@
 
     <div class="relative min-h-screen md:flex" x-data="{ open: true }">
         <!-- Sidebar -->
-        <x-sidebar-admin />
+        <x-sidebar-bidang />
 
         <!-- Main Content -->
         <main class="flex-grow">
             <nav>
                 <!-- Page Heading -->
-                @include('layouts.header-admin')
+                @include('layouts.header-bidang')
 
             </nav>
             <div>

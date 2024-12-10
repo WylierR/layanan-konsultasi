@@ -100,4 +100,24 @@ class FormController extends Controller
 
         return view('admin.sosialbudaya', compact('form'));
     }
+
+    public function bidang()
+    {
+        $max_data = 5;
+        $user = Auth::user();
+
+        if ($user->hasRole('bidang_pemerintahan')) {
+            $form = Form::orderBy('created_at', 'desc')->where('bidang', '=', 'Pemerintahan')->paginate($max_data);
+        } elseif ($user->hasRole('bidang_sosial_budaya')) {
+            $form = Form::orderBy('created_at', 'desc')->where('bidang', '=', 'Sosial Budaya')->paginate($max_data);
+        } elseif ($user->hasRole('bidang_sarana_prasarana')) {
+            $form = Form::orderBy('created_at', 'desc')->where('bidang', '=', 'Sarana dan Prasarana')->paginate($max_data);
+        } elseif ($user->hasRole('bidang_perekonomian')) {
+            $form = Form::orderBy('created_at', 'desc')->where('bidang', '=', 'Perekonomian')->paginate($max_data);
+        } else {
+            abort(403, 'Unauthorized access');
+        }
+
+        return view('bidang.dashboard', compact('form'));
+    }
 }

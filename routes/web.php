@@ -40,9 +40,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 });
 
 // Bidang
-Route::get('bidang', function () {
-    return view('bidang.dashboard');
-})->middleware(['auth', 'verified', 'role:bidang_pemerintahan|bidang_sarana_prasarana|bidang_sosial_budaya|bidang_perekonomian']);
+Route::get('bidang', [FormController::class, 'bidang'])->middleware(['auth', 'verified', 'role:bidang_pemerintahan|bidang_sarana_prasarana|bidang_sosial_budaya|bidang_perekonomian']);
 
 
 require __DIR__ . '/auth.php';
