@@ -42,6 +42,13 @@
 
 
     </div>
+    <footer class="bg-blue-800 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                © 2024 Inspektorat DIY.
+            </p>
+        </div>
+    </footer>
 </body>
 
 </html>

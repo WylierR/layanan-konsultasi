@@ -32,8 +32,10 @@
                         </svg>
 
                         @if ($notifications->whereNull('read_at')->count() > 0)
-                            <div
-                                class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900">
+                            <div {{-- absolute flex items-center justify-center w-5 h-5 bg-red-500 text-white text-xs font-bold border-2 border-white rounded-full -top-1 right-0 dark:border-gray-900 --}}
+                                class="absolute flex text-[8px] items-center justify-center w-4 h-4 bg-red-500 border-2 text-white font-light border-white rounded-full -top-1 start-2.5 dark:border-gray-900">
+                                {{ $notifications->whereNull('read_at')->count() }}
+
                             </div>
                         @endif
 

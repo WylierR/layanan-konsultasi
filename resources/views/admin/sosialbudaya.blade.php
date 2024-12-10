@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="pt-10">
-        <h1 class="px-8 pb-10 font-semibold text-3xl">JADWAL LAYANAN KONSULTASI INSPEKTORAT</h1>
+        <h1 class="px-8 pb-10 font-semibold text-3xl">DAFTAR PERMOHONAN LAYANAN KONSULTASI INSPEKTORAT</h1>
         <div class="max-w-7xl mx-auto sm:px-6 px-12">
             {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -29,42 +29,41 @@
                         class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-4">
-                                Tanggal
-                            </th>
-                            <th scope="col" class="px-6 py-4">
-                                Waktu
-                            </th>
-                            <th scope="col" class="px-6 py-4">
                                 Nama
+                            </th>
+                            <th scope="col" class="px-6 py-4">
+                                Jenis Layanan
                             </th>
                             <th scope="col" class="px-6 py-4">
                                 Pilih Layanan
                             </th>
                             <th scope="col" class="px-6 py-4">
-                                Aksi
+                                Jadwal
+                            </th>
+                            <th scope="col" class="px-6 py-4">
+                                Bidang
                             </th>
                         </tr>
                     </thead>
-                    @forelse ($form as $data)
+                    @forelse ($form->whereNotNull('bidang') as $data)
                         <tbody>
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $data->tanggal }}
+                                    {{ $data->nama }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $data->waktu }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $data->nama }}
+                                    {{ $data->jenis_layanan }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $data->pilih_layanan }}
                                 </td>
-                                <td class="px-6 py-4 text-left">
-                                    <a href="{{ route('form.detail', $data->id) }}"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
+                                <td class="px-6 py-4">
+                                    {{ $data->tanggal }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $data->bidang }}
                                 </td>
                             </tr>
                         @empty

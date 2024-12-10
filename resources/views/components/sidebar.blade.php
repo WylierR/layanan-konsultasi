@@ -23,18 +23,21 @@
         </div>
     </div>
     <!-- Navbar Link -->
-    <nav class="pt-10 pl-6 bg-white min-h-screen">
+    <nav class="pt-10 bg-white min-h-screen">
         <ul>
-            <li class="py-4 px-4 hover:bg-gray-200 text-blue-800">
+            <li class="py-4 px-8 hover:bg-gray-200 text-blue-800">
                 <a href="/admin">Dashboard</a>
             </li>
-            <li class="py-4 px-4 hover:bg-gray-200 text-blue-800">
+            <li class="py-4 px-8 hover:bg-gray-200 text-blue-800">
+                <a href="/admin/bidang">Bidang</a>
+            </li>
+            <li class="py-4 px-8 hover:bg-gray-200 text-blue-800">
                 <a href="/admin/jadwal">Jadwal</a>
             </li>
-            <li class="py-4 px-4 hover:bg-gray-200 text-blue-800">
+            <li class="py-4 px-8 hover:bg-gray-200 text-blue-800">
                 <a href="#">Riwayat</a>
             </li>
-            <li class="py-4 px-4 hover:bg-gray-200 text-blue-800">
+            <li class="py-4 px-8 hover:bg-gray-200 text-blue-800">
                 <a href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     {{ __('Keluar') }}

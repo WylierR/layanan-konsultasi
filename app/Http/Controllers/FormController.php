@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Form;
 use App\Models\User;
 use App\Models\Notification;
@@ -28,6 +29,8 @@ class FormController extends Controller
 
     public function submit(Request $request)
     {
+        $tanggal = Carbon::createFromFormat('d/m/Y', $request->input('tanggal'))->format('Y-m-d');
+
         $form = new Form();
         $form->email = $request->email;
         $form->nama = $request->nama;
@@ -36,7 +39,7 @@ class FormController extends Controller
         $form->nomor_telepon = $request->nomor_telepon;
         $form->jenis_layanan = $request->jenis_layanan;
         $form->pilih_layanan = $request->pilih_layanan;
-        $form->tanggal = $request->tanggal;
+        $form->tanggal = $tanggal;
         $form->waktu = $request->waktu;
         $form->permasalahan = $request->permasalahan;
         $form->link = $request->link;
@@ -53,7 +56,7 @@ class FormController extends Controller
         }
 
 
-        return redirect()->route('form')->with('success', 'Permohonan ada telah dikirim.');
+        return redirect()->route('submit.message')->with('success', 'Permohonan ada telah dikirim.');
     }
 
     public function detail($id)
@@ -67,11 +70,9 @@ class FormController extends Controller
         $max_data = 5;
         $form = Form::orderBy('created_at', 'desc')->paginate($max_data);
 
-
-
         return view('admin.jadwal', compact('form'));
     }
-    public function markasread($id)
+    public function markasread()
     {
         $user = Auth::user();
 
@@ -82,5 +83,21 @@ class FormController extends Controller
             return redirect()->route('form.detail', $formId);
         }
         return redirect()->back()->with('error', 'Notification not found');
+    }
+    public function addbidang(Request $request, $id)
+    {
+        $form = Form::find($id);
+        $form->bidang = $request->input('bidang');
+
+        $form->update();
+        return redirect()->back()->with('success', 'Tambah Bidang Berhasil');
+    }
+
+    public function sosialbudaya()
+    {
+        $max_data = 5;
+        $form = Form::orderBy('created_at', 'desc')->paginate($max_data);
+
+        return view('admin.sosialbudaya', compact('form'));
     }
 }
