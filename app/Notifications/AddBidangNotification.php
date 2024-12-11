@@ -7,10 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class FormSubmittedNotification extends Notification implements ShouldQueue
+class AddBidangNotification extends Notification
 {
     use Queueable;
     protected $form;
+    protected $bidang;
 
     /**
      * Create a new notification instance.
@@ -27,7 +28,6 @@ class FormSubmittedNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        // return ['mail', 'database'];
         return ['database'];
     }
 
@@ -50,12 +50,11 @@ class FormSubmittedNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'form_id' => $this->form['id'],
-            'nama' => $this->form['nama'],
-            'email' => $this->form['email'],
-            'jenis_layanan' => $this->form['jenis_layanan'],
-            'created_at' => $this->form['created_at'],
-            'bidang' => $this->form['bidang'],
+            'form_id' => $this->form->id,
+            'nama' => $this->form->nama,
+            'bidang' => $this->form->bidang,
+            'jenis_layanan' => $this->form->jenis_layanan,
+            'updated_at' => $this->form->updated_at,
         ];
     }
 }

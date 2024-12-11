@@ -31,12 +31,13 @@
                                 d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                         </svg>
 
-                        {{-- @if ($notifications->whereNull('read_at')->count() > 0)
-                            <div class="absolute flex text-[8px] items-center justify-center w-4 h-4 bg-red-500 border-2 text-white font-light border-white rounded-full -top-1 start-2.5 dark:border-gray-900">
-                                {{ $notifications->whereNull('read_at')->count() }}
+                        @if ($notificationCount > 0)
+                            <div
+                                class="absolute flex text-[8px] items-center justify-center w-4 h-4 bg-red-500 border-2 text-white font-light border-white rounded-full -top-1 start-2.5 dark:border-gray-900">
+                                {{ $notificationCount }}
 
                             </div>
-                        @endif --}}
+                        @endif
 
                     </button>
 
@@ -48,37 +49,43 @@
                             class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
                             Notifications
                         </div>
-                        {{-- @if (Auth::user()->hasRole('bidang_pemerintahan|bidang_sarana_prasarana|bidang_sosial_budaya|bidang_perekonomian'))
-                            @forelse ($notifications->whereNull('read_at') as $notification)
-                                <div class="divide-y divide-gray-100 dark:divide-gray-700">
-                                    <a href="{{ route('notifications.markasread', $notification->id) }}"
-                                        class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        <div class="flex-shrink-0">
+                        @if (Auth::user()->hasRole('bidang_pemerintahan|bidang_sarana_prasarana|bidang_sosial_budaya|bidang_perekonomian'))
+                            @forelse ($notifications->take(5) as $notification)
+                                @if (isset($notification->data['bidang']) &&
+                                        strtolower('bidang_' . str_replace(' ', '_', $notification->data['bidang'])) ===
+                                            strtolower(Auth::user()->getRoleNames()->first()))
+                                    <div class="divide-y divide-gray-100 dark:divide-gray-700">
+                                        <a href="{{ route('notifications.markasread', $notification->id) }}"
+                                            class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            <div class="flex-shrink-0">
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="rounded-full w-11 h-11">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                                            </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="rounded-full w-11 h-11">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                                </svg>
 
-                                        </div>
-                                        <div class="w-full ps-3">
-                                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">Ada permohonan
-                                                konsultasi baru dari <span
-                                                    class="font-semibold text-gray-900 dark:text-white">{{ $notification->data['nama'] }}</span>.
                                             </div>
-                                            <div class="text-xs text-blue-600 dark:text-blue-500">
-                                                {{ $notification->created_at->diffForHumans() }}
+                                            <div class="w-full ps-3">
+                                                <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">Ada
+                                                    permohonan
+                                                    konsultasi baru dari <span
+                                                        class="font-semibold text-gray-900 dark:text-white">{{ $notification->data['nama'] }}</span>.
+                                                </div>
+                                                <div class="text-xs text-blue-600 dark:text-blue-500">
+                                                    {{ $notification->created_at->diffForHumans() }}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
+                                        </a>
+                                    </div>
+                                @endif
                             @empty
                                 <div class="px-4 py-3 text-center text-gray-500 dark:text-gray-400">
                                     Tidak ada notifikasi baru.
                                 </div>
                             @endforelse
-                        @endif --}}
+                        @endif
 
                         <a href="#"
                             class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
